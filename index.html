@@ -1,0 +1,205 @@
+
+    <!-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%> -->
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+      .input-wrapper {
+                position: relative;
+                display: inline-block;
+                /* padding-left:380px; */
+                /* margin-top:0px; */
+                /* padding-top:0px; */
+            }
+    
+            .input-wrapper input {
+                /* padding-left: 10px; Space for the search icon */
+                width: 500px; /* Adjust width as per your need */
+                height: 50px; /* Adjust height as per your need */
+                font-size: 16px;
+                border:2px solid;
+                border-radius:70px;
+            }
+    
+            .input-wrapper button {
+                position: absolute;
+                right: 0;
+                top: 0;
+                height: 100%;
+                border: none;
+                background-color: transparent;
+                padding: 0 10px;
+                cursor: pointer;
+            }
+    
+            .input-wrapper button i {
+                font-size: 20px;
+                color: gray;
+            }
+    
+            /* Microphone icon styling */
+            .mic-icon {
+                position: absolute;
+                right: 40px; /* Positioning next to search icon */
+                top: 10px;
+                font-size: 20px;
+                color: gray;
+                cursor: pointer;
+            }
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    #header1{
+    /* float:right;  */
+    margin: 1em 0;
+    text-align: end;
+    width: 100%;
+    /* margin-right:0px;  */
+    font-size:20px; 
+    text-decoration:none; 
+    color:black;
+    }
+    #header1 a{
+    text-decoration:none; 
+    color:black;
+    }
+    #header{
+      display: flex;
+      justify-content: center;
+    /* padding-top:80px; */
+    /* padding-left:30px; */
+    font-size:100px;
+    /* padding-top:0px; */
+    height:350px;
+    width: 100%;
+    overflow:hidden;
+    text-align:center;
+    }
+    img{
+    margin-right:50px;
+    }
+    
+    @media(max-width:617px){
+      body{
+        height: 500vh;
+      }
+    }
+    @media (max-width:375px){
+      body{
+        max-height: 1000vh;
+      }
+    }
+   
+    </style>
+    </head>
+    <body>
+    <div id="header1">
+      <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox" style="margin-right:20px;">  Gmail </a>
+      <a href="https://images.google.com/"  style="margin-right:20px; ">Images</a> 
+    </div>
+    
+
+      <div id="first">
+        <div id="header">
+          <h1 style="color:blue; margin: 100px 0;"> G</h1>
+          <h1 style="color:red; margin: 100px 0;" >o</h1> 
+          <h1 style="color:yellow; margin: 100px 0;" >o </h1> 
+          <h1 style="color:blue; margin: 100px 0;">g </h1>
+          <h1 style="color:green; margin: 100px 0;">l </h1>
+          <h1 style="color:red; margin: 100px 0;">e</h1>
+        </div>
+      </div>
+
+      <form action="https://www.google.com/search" method="get" id="search-form">
+    
+    <!-- Input Field with Voice Search and Button -->
+      <div class="input-wrapper">
+            <!-- Input Field -->
+            <input type="text" id="search-input" name="q" placeholder="Search..." />
+    
+            <!-- Button with Search Icon -->
+            <button type="submit">
+                <i class="fas fa-search" style="color:red;"></i>
+            </button>
+            
+            <!-- Voice Search Microphone Icon -->
+            <i class="fas fa-microphone mic-icon" id="mic-icon" style="color:blue; padding-right: 10px; margin-top: 8px;"></i>
+    </div>
+    
+    <div style="display:flex;">
+    <a href="https://www.google.com/search?q=">
+    <img src="google.jpg" height="70px" width="60px" style="margin-top:50px; border:2px solid black;border-radius:10px;"> 
+    
+    </a>
+    <a href="https://www.youtube.com/" >
+    <img src="youtube.jpg" height="70px" width="60px" style="margin-top:50px;border:2px solid black;border-radius:10px;">
+    
+    </a>
+    
+    <a href="https://chatgpt.com/c/daae5cd7-4709-4c28-bcf1-4e3d11acf6ae">
+    <img src="chatgpt.jpg" height="70px" width="60px" style="margin-top:50px; border:2px solid black;border-radius:10px;">
+    </a>
+    
+    <a href="https://www.blackbox.ai/">
+    <img src="blackboxai.jpg" height="70px" width="60px" style="margin-top:50px; border:2px solid black;border-radius:10px;">
+    </a>
+    
+    <a href="https://getbootstrap.com/">
+    <img src="bootstrap.jpg" height="70px" width="60px" style="margin-top:50px; border:2px solid black;border-radius:10px;">
+    
+    </a>
+    
+    </div>
+    </form>
+    
+    <!-- JavaScript for Voice Recognition and Auto Search -->
+    <script>
+      const micIcon = document.getElementById('mic-icon');
+      const searchInput = document.getElementById('search-input');
+      const searchForm = document.getElementById('search-form');
+    
+      // Check if the browser supports the SpeechRecognition API
+      if ('webkitSpeechRecognition' in window) {
+        const recognition = new webkitSpeechRecognition();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = 'en-US';
+    
+        // Start voice recognition when the mic icon is clicked
+        micIcon.addEventListener('click', () => {
+          recognition.start();
+        });
+    
+        // Capture the speech result and place it in the search input field
+        recognition.onresult = function(event) {
+          const transcript = event.results[0][0].transcript;
+          searchInput.value = transcript;
+    
+          // Automatically submit the form after capturing voice input
+          searchForm.submit();
+        };
+    
+        // Handle errors if any occur
+        recognition.onerror = function(event) {
+          console.error('Speech recognition error:', event.error);
+        };
+      } else {
+        console.log('Speech recognition not supported in this browser.');
+      }
+    </script>
+
+
+<p class="copyright" style=" padding-top: 33px; padding-bottom: 0%;">
+  &copy;Anuj Sharma - All Rights Reserved
+</p>
+    </body>
+    </html>
+    
